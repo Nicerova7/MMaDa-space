@@ -1,0 +1,11 @@
+transformers==4.46.0
+diffusers==0.32.2
+huggingface-hub==0.36.0
+accelerate==1.2.1
+einops>=0.8,<1
+omegaconf==2.3.0
+jaxtyping==0.2.36
+typeguard==2.13.3
+numpy>=1.26,<3
+Pillow>=10.4,<13
+safetensors>=0.4.5
