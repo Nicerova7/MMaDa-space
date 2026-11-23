@@ -17,6 +17,10 @@ outputs/      answers, generated images, hidden states, metadata
 
 The adapter calls upstream `mmu_generate` and `t2i_generate`; it does not replace either sampler.
 The official code remains in a separate, pinned MMaDA checkout.
+Like Show-o2 and BAGEL, the notebook calls the adapter and capture class directly:
+prepare inputs, capture while answering/generating, then save in a separate cell.
+The `understanding.py` and `generation.py` modules provide command-line entry points.
+In MMaDA, U capture runs during answer denoising, rather than a separate autoregressive prefill.
 
 - **Model:** `Gen-Verse/MMaDA-8B-MixCoT`, 32 shared layers, hidden size 4096.
 - **Images:** official MAGVIT-v2 tokenizer, 512 × 512, 1024 discrete visual tokens.
