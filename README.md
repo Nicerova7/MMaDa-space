@@ -1,5 +1,11 @@
 # MMaDa-space
 
+## Experiments
+
+1. **U → U** · [Open in Colab](https://colab.research.google.com/github/Nicerova7/MMaDa-space/blob/experiment/custom-steering-vectors/experiments/custom-steering-vectors/colab-u2u-refusal-vlguard.ipynb) · [Notebook](experiments/custom-steering-vectors/colab-u2u-refusal-vlguard.ipynb). Build the text-only 128/128 refusal vector used as the Show-o2 reference, preview strengths on one VLGuard weekly pair, then compare baseline, text, visual and joint steering on all 20 weekly pairs. Each run exports a manual review workbook.
+
+## Base inference
+
 Run official MMaDA understanding and image generation; capture selected transformer-layer outputs.
 Start with [colab.ipynb](colab.ipynb) on one **A100 80 GB**, BF16, without quantization.
 
@@ -42,7 +48,7 @@ The last evaluation is the forward **before** the final sampling update, not a n
 Each run saves `hidden_states.pt` and `metadata.json`, plus `answer.txt` for U or `image.png` for G.
 The tensor file includes the exact input token IDs at the captured evaluation. Metadata identifies visual spans,
 prompt text positions, response spans, mask positions, settings, and pinned code/model revisions.
-No token averaging, steering, or training is included.
+The base notebook saves unpooled states. The experiment above builds and applies steering vectors.
 
 With this project and the pinned official checkout on `PYTHONPATH`:
 

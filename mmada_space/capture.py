@@ -1,4 +1,4 @@
-"""Capture selected layer outputs at one denoising evaluation."""
+"""Capture selected layer outputs during denoising."""
 import json
 from pathlib import Path
 
@@ -6,17 +6,21 @@ import torch
 
 
 class Capture:
-    def __init__(self, adapter, layers, step=1):
+    def __init__(self, adapter, layers, step=1, *, steps=None, position=None):
         self.adapter = adapter
         self.layers = list(dict.fromkeys(layers))
-        self.step = step
-        self.states = {}
+        evaluations = tuple(steps) if steps is not None else (step,)
+        self.step = evaluations[0]
+        self.position = position
+        self.states_by_step = {evaluation: {} for evaluation in evaluations}
+        self.states = self.states_by_step[self.step]
         self.input_ids = None
         self.evaluations = 0
         self.handles = []
 
     def __enter__(self):
-        self.states.clear()
+        for states in self.states_by_step.values():
+            states.clear()
         self.input_ids = None
         self.evaluations = 0
         self.handles.append(self.adapter.model.register_forward_pre_hook(
@@ -34,8 +38,10 @@ class Capture:
 
     def _hook(self, layer):
         def save(module, args, output):
-            if self.evaluations == self.step:
-                self.states[layer] = output[0][0].detach().float().cpu().clone()
+            if self.evaluations in self.states_by_step:
+                hidden = output[0][0]
+                selected = hidden if self.position is None else hidden[self.position]
+                self.states_by_step[self.evaluations][layer] = selected.detach().float().cpu().clone()
         return save
 
     def __exit__(self, *exc):
