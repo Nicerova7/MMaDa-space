@@ -2,7 +2,7 @@
 
 ## Experiments
 
-1. **U → U** · [Open in Colab](https://colab.research.google.com/github/Nicerova7/MMaDa-space/blob/experiment/custom-steering-vectors/experiments/custom-steering-vectors/colab-u2u-refusal-vlguard.ipynb) · [Notebook](experiments/custom-steering-vectors/colab-u2u-refusal-vlguard.ipynb). Build the text-only 128/128 refusal vector used as the Show-o2 reference, preview strengths on one VLGuard weekly pair, then compare baseline, text, visual and joint steering on all 20 weekly pairs. Each run exports a manual review workbook.
+1. **U → U** · [Open in Colab](https://colab.research.google.com/github/Nicerova7/MMaDa-space/blob/experiment/custom-steering-vectors/experiments/custom-steering-vectors/colab-u2u-refusal-vlguard.ipynb) · [Notebook](experiments/custom-steering-vectors/colab-u2u-refusal-vlguard.ipynb). Build the text-only 128/128 refusal vector used as the Show-o2 reference, preview strengths on one VLGuard weekly pair, then compare baseline, text, visual and joint steering on all 20 weekly pairs. Export the full run to Excel for manual review, then upload it to plot the results.
 
 ## Base inference
 
